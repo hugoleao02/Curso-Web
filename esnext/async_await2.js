@@ -1,0 +1,33 @@
+function gerarNumero(min,max,numerosProibidos){
+    if(min > max) [max,min] = [min,max];
+
+    return new Promise((resolve, reject) => {
+        const fator = max - min + 1;
+        const aleatorio = parseInt(Math.random() * fator) + min;
+        if(numerosProibidos.includes(aleatorio)){
+            reject("Número repetido!");
+        }else{
+            resolve(aleatorio);
+        }
+    });
+}
+
+async function geraMegaSena(qtdNumeros, tentativas =1 ){
+    const numeros = [];
+    try {
+        for(let _ of Array(qtdNumeros).fill()){
+            numeros.push(await gerarNumero(1,60,numeros));
+        }
+        return numeros;
+    } catch (error) {
+        if( tentativas > 10){
+            throw 'Não deu certo!';
+        }else{
+            return geraMegaSena(qtdNumeros, tentativas + 1);n
+        }
+    }
+}
+
+geraMegaSena(15)
+    .then(console.log)
+    .catch(console.log)
