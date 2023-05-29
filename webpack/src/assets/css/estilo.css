@@ -1,0 +1,6 @@
+body {
+    background-color: red;
+    background-image: url(../imgs/imagem.jpg);
+    background-position: center;
+    height: 100vh;
+}
